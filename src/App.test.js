@@ -3,8 +3,7 @@ import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-17-updated';
 import { shallow } from 'enzyme';
 import App from './App';
-import { addTask } from './App';
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -19,3 +18,14 @@ it("Should have title of Todo app as TodoMatic", () => {
     const app = render(<App />);
     expect(app.getByTestId("app-heading")).toHaveTextContent("TodoMatic")
 })
+
+it("Should be able to add task", () => {
+  const app = render(<App />);
+  fireEvent.change(app.getByTestId("new-todo"),{
+    target : {value: "new task"}
+  })
+  fireEvent.click(app.getByTestId("submit-todo"))
+  expect(app.getByTestId("todo-label").textContent).toBe(" new task ")
+
+})
+
