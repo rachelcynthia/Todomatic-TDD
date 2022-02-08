@@ -19,7 +19,3 @@ it("Should have title of Todo app as TodoMatic", () => {
     const app = render(<App />);
     expect(app.getByTestId("app-heading")).toHaveTextContent("TodoMatic")
 })
-
-it("New test", () => {
-  expect(addTask("Pallavi"))
-})
