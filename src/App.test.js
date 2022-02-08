@@ -29,3 +29,16 @@ it("Should be able to add task", () => {
 
 })
 
+it("Should be able to delete task", () => {
+  const app = render(<App />);
+  fireEvent.change(app.getByTestId("new-todo"),{
+    target : {value: "new task"}
+  })
+  fireEvent.click(app.getByTestId("submit-todo"))
+  expect(app.getByTestId("todo-label").textContent).toBe(" new task ")
+
+  fireEvent.click(app.getByTestId("delete-todo"))
+  const newTodo = app.queryByText("new task")
+  expect(newTodo).toBeNull()
+})
+
